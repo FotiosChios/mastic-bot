@@ -2,6 +2,8 @@ FROM ubuntu:22.04
 
 RUN apt update && apt install -y curl python3 python3-pip git
 
+RUN sudo apt-get install zstd
+
 RUN curl -fsSL https://ollama.com/install.sh | sh
 
 EXPOSE 11434
