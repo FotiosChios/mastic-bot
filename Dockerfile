@@ -1,17 +1,6 @@
-FROM ubuntu:22.04
-
-RUN apt update && apt install -y \
-    curl \
-    python3 \
-    python3-pip \
-    git \
-    zstd
-
-RUN curl -fsSL https://ollama.com/install.sh | sh
-
+COPY . /app
 WORKDIR /app
-COPY . .
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
-CMD ["ollama","serve"]
+CMD bash -c "ollama serve & python bot.py"
