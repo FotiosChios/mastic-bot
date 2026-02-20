@@ -14,4 +14,6 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 
+RUN ollama serve & sleep 5 && ollama pull qwen2.5:7b
+
 CMD bash -c "ollama serve & python bot.py"
