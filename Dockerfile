@@ -18,4 +18,11 @@ RUN pip install -r requirements.txt
 
 RUN ollama serve & sleep 5 && ollama pull qwen2.5:7b
 
-CMD bash -c "ollama serve & python3 bot.py"
+ENV OLLAMA_MODELS=/data/ollama
+
+CMD bash -c "
+ollama serve &
+sleep 10 &&
+python ingest.py &&
+python bot.py
+"
