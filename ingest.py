@@ -4,7 +4,7 @@ from sentence_transformers import SentenceTransformer
 
 print("Reading PDF...")
 
-reader = PdfReader("Mastixa.pdf")
+reader = PdfReader("manual.pdf")
 
 text = ""
 for page in reader.pages:
@@ -26,14 +26,14 @@ print("Creating database...")
 client = chromadb.Client()
 collection = client.create_collection("mastic")
 
-for i, chunk in enumerate(chunks):
-    embedding = embedder.encode(chunk)
+# Batch encode all chunks at once (efficient!)
+embeddings = embedder.encode(chunks)
 
+for i, chunk in enumerate(chunks):
     collection.add(
         documents=[chunk],
-        embeddings=[embedding],
+        embeddings=[embeddings[i]],  # Use pre-computed embedding
         ids=[str(i)]
     )
-
 
 print("DONE — knowledge stored.")
