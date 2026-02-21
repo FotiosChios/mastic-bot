@@ -4,7 +4,7 @@ from sentence_transformers import SentenceTransformer
 
 print("Reading PDF...")
 
-reader = PdfReader("mastixa.pdf")
+reader = PdfReader("Mastixa.pdf")
 
 text = ""
 for page in reader.pages:
@@ -37,4 +37,5 @@ for i, chunk in enumerate(chunks):
     )
 
 print("DONE — knowledge stored.")
+
 
