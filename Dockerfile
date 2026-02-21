@@ -9,9 +9,13 @@ RUN apt update && apt install -y \
 
 RUN curl -fsSL https://ollama.com/install.sh | sh
 
+ENV OLLAMA_HOST=0.0.0.0
+
+COPY . /app
 WORKDIR /app
-COPY . .
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
-CMD ["ollama","serve"]
+RUN ollama serve & sleep 5 && ollama pull qwen2.5:7b
+
+CMD bash -c "ollama serve & python3 bot.py"
