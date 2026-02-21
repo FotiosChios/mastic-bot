@@ -20,9 +20,4 @@ RUN ollama serve & sleep 5 && ollama pull qwen2.5:7b
 
 ENV OLLAMA_MODELS=/data/ollama
 
-CMD bash -c "
-ollama serve &
-sleep 10 &&
-python ingest.py &&
-python bot.py
-"
+CMD ["bash", "-c", "ollama serve & sleep 10 && python3 ingest.py && python3 bot.py"]
